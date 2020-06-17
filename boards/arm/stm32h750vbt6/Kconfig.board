@@ -1,0 +1,9 @@
+# STM32H750 StarStar Develop board configuration
+
+# Copyright (c) 2020 StarStar
+# SPDX-License-Identifier: Apache-2.0
+
+config BOARD_STM32H750VBT6
+	bool "STM32H750 StarStar Development Board"
+	depends on SOC_STM32H750XX
+	select CPU_CORTEX_M7

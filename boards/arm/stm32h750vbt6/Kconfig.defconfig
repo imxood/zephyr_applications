@@ -1,0 +1,47 @@
+# STM32H750VBT6 starstar board configuration
+
+# Copyright (c) 2020 StarStar Limited
+# SPDX-License-Identifier: Apache-2.0
+
+if BOARD_STM32H750VBT6
+
+config BOARD
+	default "stm32h750vbt6" if BOARD_STM32H750VBT6
+
+# clock configuration
+config SYS_CLOCK_HW_CYCLES_PER_SEC
+	default 400000000
+
+config CLOCK_STM32_D1CPRE
+	default 1
+
+config CLOCK_STM32_HPRE
+	# HCLK: 200MHz
+	default 2
+
+config CLOCK_STM32_D2PPRE1
+	# APBX: 100MHz
+	default 2
+
+config CLOCK_STM32_D2PPRE2
+	default 2
+
+config CLOCK_STM32_D1PPRE
+	default 2
+
+config CLOCK_STM32_D3PPRE
+	default 2
+
+config STM32H7_DUAL_CORE
+	default n
+
+# Dual core boot configuration. Boot method is selected in common file to avoid
+# desync issues.
+choice STM32H7_DUAL_CORE_BOOT
+	# Use out of the box config by default
+	# default STM32H7_BOOT_CM4_CM7
+	default STM32H7_BOOT_CM7_CM4GATED
+	depends on STM32H7_DUAL_CORE
+endchoice
+
+endif # BOARD_STM32H750VBT6

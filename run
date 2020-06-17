@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+import os
+import subprocess as sp
+import logging
+
+log = logging.getLogger('cmd')
+log.setLevel(logging.DEBUG)
+
+
+def run_cmd(cmd, env=os.environ):
+    '''run shell command'''
+    log.info('run cmd: %s' % cmd)
+    try:
+
+        with sp.Popen(cmd, shell=True, stdout=sp.PIPE, stderr=sp.STDOUT, env=env) as proc:
+            for line in iter(proc.stdout.readline, b''):
+                line = str(line, encoding='utf-8').rstrip()
+                log.info(line)
+            return proc.poll()
+        # with sp.Popen(cmd, stdout=sp.PIPE, stderr=sp.PIPE, shell=True) as proc:
+
+        #     stdout, stderr = proc.communicate()
+        #     proc.wait()
+        #     log.info(str(stdout, encoding='utf-8'))
+
+    except Error as e:
+        log.error(str(e))
+        sys.exit(-1)
+
+
+def build():
+    cmd = r'west build -b stm32h750vbt6 ./apps -- -DBOARD_ROOT=/develop/sources/zephyrproject/zephyr/zephyr_applications'
+    return run_cmd(cmd)
+
+
+if __name__ == "__main__":
+    build()
