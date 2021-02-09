@@ -1,0 +1,11 @@
+# STM32F103C8T6 Mini board configuration
+
+# Copyright (c) 2020 WuhanStudio
+# SPDX-License-Identifier: Apache-2.0
+
+if BOARD_STM32F103C8T6
+
+config BOARD
+	default "STM32F103C8T6"
+
+endif # BOARD_STM32F103C8T6

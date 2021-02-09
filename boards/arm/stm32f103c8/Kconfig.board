@@ -1,0 +1,8 @@
+# STM32F103C8T6 Mini board configuration
+
+# Copyright (c) 2020 maxu
+# SPDX-License-Identifier: Apache-2.0
+
+config BOARD_STM32F103C8T6
+	bool "STM32F103C8T6 Mini Board"
+	depends on SOC_STM32F103XB

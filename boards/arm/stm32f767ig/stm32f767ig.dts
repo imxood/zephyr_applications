@@ -1,0 +1,45 @@
+/*
+ * Copyright (c) 2021 maxu
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/dts-v1/;
+#include <st/f7/stm32f767Xi.dtsi>
+#include <st/f7/stm32f767i(g-i)tx-pinctrl.dtsi>
+
+/ {
+	model = "STMicroelectronics STM32F767IG board";
+	compatible = "st,stm32f7I-disco";
+
+	chosen {
+		zephyr,console = &usart3;
+		zephyr,shell-uart = &usart3;
+		zephyr,sram = &sram0;
+		zephyr,flash = &flash0;
+		zephyr,dtcm = &dtcm;
+	};
+
+	leds {
+		compatible = "gpio-leds";
+		red_led_1: led_1 {
+			gpios = <&gpiob 1 GPIO_ACTIVE_LOW>;
+			label = "User red led";
+		};
+		green_led_2: led_2 {
+			gpios = <&gpiob 0 GPIO_ACTIVE_HIGH>;
+			label = "User green led";
+		};
+	};
+};
+
+&usart3 {
+	pinctrl-0 = <&usart3_tx_pb10 &usart3_rx_pb11>;
+	current-speed = <115200>;
+	status = "okay";
+};
+
+&usbotg_fs {
+    pinctrl-0 = <&usb_otg_fs_dm_pa11 &usb_otg_fs_dp_pa12>;
+    status = "okay";
+};
